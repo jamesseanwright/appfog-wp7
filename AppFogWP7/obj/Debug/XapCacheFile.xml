@@ -1,8 +1,8 @@
-﻿<xapCache source="c:\Users\Administrator.WIN7\Documents\Visual Studio 2010\Projects\AppFogWP7\AppFogWP7\Bin\Debug\AppFogWP7.xap" wasSigned="False" certificateThumbprint="" TimeStampUrl="" lastWriteTime="1/31/2013 7:28:56 AM">
+﻿<xapCache source="c:\Users\Administrator.WIN7\Documents\Visual Studio 2010\Projects\AppFogWP7\AppFogWP7\Bin\Debug\AppFogWP7.xap" wasSigned="False" certificateThumbprint="" TimeStampUrl="" lastWriteTime="1/31/2013 9:18:59 AM">
   <file source="c:\Users\Administrator.WIN7\Documents\Visual Studio 2010\Projects\AppFogWP7\AppFogWP7\Bin\Debug\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="1/31/2013 1:54:07 AM" />
   <file source="c:\Users\Administrator.WIN7\Documents\Visual Studio 2010\Projects\AppFogWP7\AppFogWP7\Background.png" archivePath="Background.png" lastWriteTime="1/31/2013 1:48:32 AM" />
   <file source="c:\Users\Administrator.WIN7\Documents\Visual Studio 2010\Projects\AppFogWP7\AppFogWP7\ApplicationIcon.png" archivePath="ApplicationIcon.png" lastWriteTime="1/31/2013 1:48:32 AM" />
-  <file source="c:\Users\Administrator.WIN7\Documents\Visual Studio 2010\Projects\AppFogWP7\AppFogWP7\obj\Debug\AppFogWP7.dll" archivePath="AppFogWP7.dll" lastWriteTime="1/31/2013 7:28:56 AM" />
+  <file source="c:\Users\Administrator.WIN7\Documents\Visual Studio 2010\Projects\AppFogWP7\AppFogWP7\obj\Debug\AppFogWP7.dll" archivePath="AppFogWP7.dll" lastWriteTime="1/31/2013 9:18:58 AM" />
   <file source="c:\Users\Administrator.WIN7\Documents\Visual Studio 2010\Projects\AppFogWP7\packages\MvvmLight.4.1.26.1\lib\sl4-wp71\GalaSoft.MvvmLight.Extras.WP71.dll" archivePath="GalaSoft.MvvmLight.Extras.WP71.dll" lastWriteTime="1/31/2013 1:50:10 AM" />
   <file source="c:\Users\Administrator.WIN7\Documents\Visual Studio 2010\Projects\AppFogWP7\packages\MvvmLight.4.1.26.1\lib\sl4-wp71\GalaSoft.MvvmLight.WP71.dll" archivePath="GalaSoft.MvvmLight.WP71.dll" lastWriteTime="1/31/2013 1:50:10 AM" />
   <file source="c:\Users\Administrator.WIN7\Documents\Visual Studio 2010\Projects\AppFogWP7\packages\MvvmLight.4.1.26.1\lib\sl4-wp71\Microsoft.Practices.ServiceLocation.dll" archivePath="Microsoft.Practices.ServiceLocation.dll" lastWriteTime="1/31/2013 1:50:10 AM" />
@@ -10,5 +10,5 @@
   <file source="c:\Users\Administrator.WIN7\Documents\Visual Studio 2010\Projects\AppFogWP7\packages\MvvmLight.4.1.26.1\lib\sl4-wp71\System.Windows.Interactivity.dll" archivePath="System.Windows.Interactivity.dll" lastWriteTime="1/31/2013 1:50:10 AM" />
   <file source="c:\Users\Administrator.WIN7\Documents\Visual Studio 2010\Projects\AppFogWP7\AppFogWP7\MVVMLight.Nuget.Readme.txt" archivePath="MVVMLight.Nuget.Readme.txt" lastWriteTime="1/31/2013 1:50:16 AM" />
   <file source="c:\Users\Administrator.WIN7\Documents\Visual Studio 2010\Projects\AppFogWP7\AppFogWP7\SplashScreenImage.jpg" archivePath="SplashScreenImage.jpg" lastWriteTime="1/31/2013 1:48:32 AM" />
-  <file source="c:\Users\Administrator.WIN7\Documents\Visual Studio 2010\Projects\AppFogWP7\AppFogWP7\Bin\Debug\AppManifest.xaml" archivePath="AppManifest.xaml" lastWriteTime="1/31/2013 5:24:06 AM" />
+  <file source="c:\Users\Administrator.WIN7\Documents\Visual Studio 2010\Projects\AppFogWP7\AppFogWP7\Bin\Debug\AppManifest.xaml" archivePath="AppManifest.xaml" lastWriteTime="1/31/2013 8:58:31 AM" />
 </xapCache>
