@@ -38,15 +38,45 @@
                 <RowDefinition Height="48" />
                 <RowDefinition Height="72" />
                 <RowDefinition Height="72" />
+                <RowDefinition Height="48" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <TextBlock Text="AppFog Token" Grid.Row="0" />
-            <TextBox x:Name="TxtAuthToken" Grid.Row="1" IsEnabled="{Binding Loading, Converter={StaticResource booleanInverter}}" />
-            <Button x:Name="BtnAuthenticate" Content="Authenticate"  Grid.Row="2" Command="{Binding GetInfoCommand}" IsEnabled="{Binding Loading, Converter={StaticResource booleanInverter}}" />
+            <TextBox x:Name="TxtAuthToken" Text="04085b0849221e6a616d65737365616e77726967687440676d61696c2e636f6d063a0645466c2b0742fa0b51221976489a356e7d7db7dc4a96f28bd689dddf098729"
+                     Grid.Row="1" IsEnabled="{Binding Loading, Converter={StaticResource booleanInverter}}" />
+            <Button x:Name="BtnAuthenticate" Content="Authenticate"  Grid.Row="2" Command="{Binding GetInfoCommand}" CommandParameter="{Binding Text, ElementName=TxtAuthToken}" IsEnabled="{Binding Loading, Converter={StaticResource booleanInverter}}" />
             <TextBlock x:Name="TbkLoading" Text="Loading..." Visibility="{Binding Loading, Converter={StaticResource booleanToVisibilityConverter}}" Grid.Row="3" />
+            <StackPanel Grid.Row="4" Visibility="{Binding Loaded, Converter={StaticResource booleanToVisibilityConverter}}">
+                <TextBlock Style="{StaticResource PhoneTextTitle2Style }" Text="Info" />
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Username: " />
+                    <TextBlock Text="{Binding InfoModel.User}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Plan: " />
+                    <TextBlock Text="{Binding InfoModel.Plan}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Number of apps: " />
+                    <TextBlock Text="{Binding InfoModel.Apps}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Memory Usage: " />
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding InfoModel.MemoryUsed}" />
+                        <TextBlock Text="/" />
+                        <TextBlock Text="{Binding InfoModel.TotalMemory}" />
+                        <TextBlock Text="MB" />
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Margin="0, 10, 0, 3">
+                    <TextBlock Text="Frameworks" Style="{StaticResource PhoneTextTitle3Style}" />
+                    <ListBox ItemsSource="{Binding InfoModel.Frameworks}" />
+                </StackPanel>
+            </StackPanel>
         </Grid>
     </Grid>
  

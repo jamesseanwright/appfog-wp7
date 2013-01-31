@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,7 +15,15 @@ namespace AppFogWP7.Model
     public class InfoModel
     {
         public string User { get; set; }
-        private string Plan { get; set; }
-        private string[] Frameworks { get; set; }
+        public string Plan { get; set; }
+        public int Apps { get; set; }
+        public int MemoryUsed { get; set; }
+        public int TotalMemory { get; set; }
+        public List<string> Frameworks { get; set; }
+
+        public InfoModel()
+        {
+            Frameworks = new List<string>();
+        }
     }
 }
