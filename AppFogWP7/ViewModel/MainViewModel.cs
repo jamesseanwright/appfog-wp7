@@ -16,7 +16,6 @@ namespace AppFogWP7.ViewModel
     public class MyAppViewModelBase : ViewModelBase
     {
         private bool _loading;
-        private bool _loaded;
 
 
         public bool Loading
@@ -28,17 +27,6 @@ namespace AppFogWP7.ViewModel
                 RaisePropertyChanged("Loading");
             }
         }
-
-        public bool Loaded
-        {
-            get { return _loaded; }
-            set
-            {
-                _loaded = value;
-                RaisePropertyChanged("Loaded");
-            }
-        }
-   
     }
 
     /// <summary>
@@ -60,7 +48,6 @@ namespace AppFogWP7.ViewModel
         /// </summary>
         public MainViewModel()
         {
-            _infoModel = new InfoModel();
             _getInfoCommand = new RelayCommand<string>(GetInfo);
         }
 
@@ -76,9 +63,14 @@ namespace AppFogWP7.ViewModel
             }
         }
 
-        public bool IsInfoModelAvailble
+        public bool IsInfoModelAvailable
         {
-            get { return InfoModel == null; }
+            set
+            {
+                _isInfoModelAvailable = value;
+                RaisePropertyChanged("IsInfoModelAvailable");
+            }
+            get { return _isInfoModelAvailable; }
         }
 
         public RelayCommand<string> GetInfoCommand
@@ -86,16 +78,16 @@ namespace AppFogWP7.ViewModel
             get { return _getInfoCommand; }
         }
 
- 
         #endregion
 
         #region methods
-        public void GetInfo(string token)
+        public async void GetInfo(string token)
         {
             Loading = true;
             AppFogDataService appFogDataService = new AppFogDataService();
-            appFogDataService.CallAPI(token, (newItem, e) => InfoModel = newItem);
+            InfoModel = await appFogDataService.CallAPI(token);
             Loading = false;
+            IsInfoModelAvailable = true;
         }
 
         #endregion
@@ -104,12 +96,8 @@ namespace AppFogWP7.ViewModel
 
         private InfoModel _infoModel;
         private RelayCommand<string> _getInfoCommand;
-        private string _appFogToken;
-        
+        private bool _isInfoModelAvailable;
 
         #endregion
-
-
-
     }
 }

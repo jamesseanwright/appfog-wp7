@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Threading;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
 using System.Runtime.Serialization;
@@ -14,32 +16,29 @@ namespace AppFogWP7.DataService
 {
     public class AppFogDataService
     {
-        public void CallAPI(string token, Action<InfoModel, Exception> callback)
+        public async Task<InfoModel> CallAPI(string token)
         {
             WebClient client = new WebClient();
             client.Headers[HttpRequestHeader.Authorization] = token;
 
-            client.DownloadStringCompleted += (sender, args) =>
+            string data = await client.DownloadStringTaskAsync(new Uri("https://api.appfog.com/info"));
+
+            InfoModel newModel = new InfoModel();
+
+            JObject infoJson = JObject.Parse(data);
+            newModel.User = infoJson["user"].ToString();
+            newModel.Plan = infoJson["plan"].ToString();
+
+            foreach (JToken framework in infoJson["frameworks"].Children())
             {
-                InfoModel newModel = new InfoModel();
+                newModel.Frameworks.Add(framework.First["name"].ToString());
+            }
 
-                JObject infoJson = JObject.Parse(args.Result);
-                newModel.User = infoJson["user"].ToString();
-                newModel.Plan = infoJson["plan"].ToString();
+            newModel.Apps = (int) infoJson["usage"]["apps"];
+            newModel.MemoryUsed = (int) infoJson["usage"]["memory"];
+            newModel.TotalMemory = (int) infoJson["limits"]["memory"];
 
-                foreach (JToken framework in infoJson["frameworks"].Children())
-                {
-                    newModel.Frameworks.Add(framework.First["name"].ToString());
-                }
-
-                newModel.Apps = (int) infoJson["usage"]["apps"];
-                newModel.MemoryUsed = (int) infoJson["usage"]["memory"];
-                newModel.TotalMemory = (int) infoJson["limits"]["memory"];
-                
-                callback(newModel, null);
-            };
-
-            client.DownloadStringAsync(new Uri("https://api.appfog.com/info"));
+            return newModel;
         }
     }
 }

@@ -21,3 +21,5 @@ c:\users\administrator.win7\documents\visual studio 2010\Projects\AppFogWP7\AppF
 c:\users\administrator.win7\documents\visual studio 2010\Projects\AppFogWP7\AppFogWP7\obj\Debug\XapCacheFile.xml
 c:\Users\Administrator.WIN7\Documents\Visual Studio 2010\Projects\AppFogWP7\AppFogWP7\Bin\Debug\Newtonsoft.Json.dll
 c:\Users\Administrator.WIN7\Documents\Visual Studio 2010\Projects\AppFogWP7\AppFogWP7\Bin\Debug\Newtonsoft.Json.xml
+C:\Users\Administrator.WIN7\Documents\Visual Studio 2010\Projects\AppFogWP7\AppFogWP7\Bin\Debug\AsyncCtpLibrary_Phone.dll
+C:\Users\Administrator.WIN7\Documents\Visual Studio 2010\Projects\AppFogWP7\AppFogWP7\Bin\Debug\AsyncCtpLibrary_Phone.xml
