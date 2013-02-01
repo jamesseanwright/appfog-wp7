@@ -1,0 +1,4 @@
+<Modules>
+  <Module PersistentId="90F7B839-69CB-46CE-82C5-6C64F21B898E" ModuleId="AppFogWP7" />
+  <Module PersistentId="827FED31-8B96-43A2-A7AF-58535501C1C4" ModuleId="UnitTests" />
+</Modules>
