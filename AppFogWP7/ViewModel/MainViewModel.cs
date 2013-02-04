@@ -13,22 +13,6 @@ using AppFogWP7.DataService;
 
 namespace AppFogWP7.ViewModel
 {
-    public class MyAppViewModelBase : ViewModelBase
-    {
-        private bool _loading;
-
-
-        public bool Loading
-        {
-            get { return _loading; }
-            set
-            {
-                _loading = value;
-                RaisePropertyChanged("Loading");
-            }
-        }
-    }
-
     /// <summary>
     /// This class contains properties that the main View can data bind to.
     /// <para>
