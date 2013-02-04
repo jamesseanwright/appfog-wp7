@@ -80,6 +80,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataService\AppFogDataService.cs" />
+    <Compile Include="DataService\IDataService.cs" />
+    <Compile Include="DataService\Mock\TestableWebClient.cs" />
+    <Compile Include="DataService\MyWebClient.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

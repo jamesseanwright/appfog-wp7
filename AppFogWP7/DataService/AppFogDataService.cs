@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
 using System.Runtime.Serialization;
+using AppFogWP7.DataService.Mock;
 using GalaSoft.MvvmLight;
 using AppFogWP7.Model;
 using System.Net;
@@ -16,10 +18,22 @@ namespace AppFogWP7.DataService
 {
     public class AppFogDataService
     {
+        
         public async Task<InfoModel> CallAPI(string token)
         {
-            WebClient client = new WebClient();
-            client.Headers[HttpRequestHeader.Authorization] = token;
+            IDataService client;
+            bool isUnitTest = AppDomain.CurrentDomain.GetAssemblies().Any(a => a.FullName.StartsWith("Microsoft.VisualStudio.QualityTools.UnitTestFramework"));
+
+            if(isUnitTest)
+            {
+                client = new TestableWebClient();   
+            }
+            else
+            {
+                client = new MyWebClient();
+            }
+
+            client.AuthHeader = token;
 
             string data = await client.DownloadStringTaskAsync(new Uri("https://api.appfog.com/info"));
 

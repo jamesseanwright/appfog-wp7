@@ -45,7 +45,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <TextBlock Text="AppFog Token" Grid.Row="0" />
-            <TextBox x:Name="TxtAuthToken" Grid.Row="1" IsEnabled="{Binding Loading, Converter={StaticResource booleanInverter}}" />
+            <TextBox x:Name="TxtAuthToken" Text="04085b0849221b6a616d65732e7772696768744062736b79622e636f6d063a0645466c2b077d2815512219375364d09677701f82765e66e3d728c6b05c6fe8" Grid.Row="1" IsEnabled="{Binding Loading, Converter={StaticResource booleanInverter}}" />
             <Button x:Name="BtnAuthenticate" Content="Authenticate"  Grid.Row="2" Command="{Binding GetInfoCommand}" CommandParameter="{Binding Text, ElementName=TxtAuthToken}" IsEnabled="{Binding Loading, Converter={StaticResource booleanInverter}}" />
             <TextBlock x:Name="TbkLoading" Text="Loading..." Visibility="{Binding Loading, Converter={StaticResource booleanToVisibilityConverter}}" Grid.Row="3" />
             <StackPanel Grid.Row="4" Visibility="{Binding IsInfoModelAvailable, Converter={StaticResource booleanToVisibilityConverter}}">
