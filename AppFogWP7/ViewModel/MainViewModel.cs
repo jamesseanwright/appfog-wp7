@@ -1,20 +1,14 @@
-using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using System;
 using System.Windows.Input;
-using System.Windows;
-using System.Runtime.Serialization;
+using System.Windows.Navigation;
 using GalaSoft.MvvmLight;
-using AppFogWP7.Model;
-using System.Net;
 using GalaSoft.MvvmLight.Command;
-using Newtonsoft.Json.Linq;
-using AppFogWP7.DataService;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace AppFogWP7.ViewModel
 {
     /// <summary>
-    /// This class contains properties that the main View can data bind to.
+    /// This class contains properties that a View can data bind to.
     /// <para>
     /// Use the <strong>mvvminpc</strong> snippet to add bindable properties to this ViewModel.
     /// </para>
@@ -22,66 +16,47 @@ namespace AppFogWP7.ViewModel
     /// You can also use Blend to data bind with the tool's support.
     /// </para>
     /// <para>
-    /// See http://www.galasoft.ch/mvvm
+    /// See http://www.galasoft.ch/mvvm/getstarted
     /// </para>
     /// </summary>
     public class MainViewModel : MyAppViewModelBase
     {
-        /// <summary>
-        /// Initializes a new instance of the MainViewModel class.
-        /// </summary>
+        public RelayCommand<string> SaveAuthTokenCommand { get; private set; }
+        public RelayCommand<string> GoToPageCommand { get; private set; }
+        
+        private bool _isTokenSaved;
+        public bool IsTokenSaved
+        {
+            get { return _isTokenSaved; }
+            set 
+            { 
+                _isTokenSaved = value;
+                RaisePropertyChanged("IsTokenSaved");
+            }
+        }
+
         public MainViewModel()
         {
-            _getInfoCommand = new RelayCommand<string>(GetInfo);
+            SaveAuthTokenCommand = new RelayCommand<string>(SaveAuthToken);
+            GoToPageCommand = new RelayCommand<string>(GoToPage);
         }
 
-        #region properties
-
-        public InfoModel InfoModel
+        public void SaveAuthToken(string token)
         {
-            get { return _infoModel; }
-            set
+            (App.Current as App).AuthToken = token;
+            IsTokenSaved = true;
+        }
+
+        public void GoToPage(string page)
+        {
+            try
             {
-                _infoModel = value;
-                RaisePropertyChanged("InfoModel");
+                Messenger.Default.Send(new Uri("/" + page + "Page.xaml", UriKind.Relative), "NavigationRequest");
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine(e.Message);
             }
         }
-
-        public bool IsInfoModelAvailable
-        {
-            set
-            {
-                _isInfoModelAvailable = value;
-                RaisePropertyChanged("IsInfoModelAvailable");
-            }
-            get { return _isInfoModelAvailable; }
-        }
-
-        public RelayCommand<string> GetInfoCommand
-        {
-            get { return _getInfoCommand; }
-        }
-
-        #endregion
-
-        #region methods
-        public async void GetInfo(string token)
-        {
-            Loading = true;
-            AppFogDataService appFogDataService = new AppFogDataService();
-            InfoModel = await appFogDataService.CallAPI(token);
-            Loading = false;
-            IsInfoModelAvailable = true;
-        }
-
-        #endregion
-
-        #region fields
-
-        private InfoModel _infoModel;
-        private RelayCommand<string> _getInfoCommand;
-        private bool _isInfoModelAvailable;
-
-        #endregion
     }
 }

@@ -13,8 +13,7 @@ namespace UnitTests
         [TestMethod]
         public void InfoModelIsAvailableWhenPopulated()
         {
-            MainViewModel mainViewModel = new MainViewModel();
-            mainViewModel.GetInfo("a_token");
+            InfoViewModel mainViewModel = new InfoViewModel();
             Assert.IsTrue(mainViewModel.IsInfoModelAvailable);
         }
     }

@@ -4,6 +4,7 @@
     <AssemblyPart x:Name="AsyncCtpLibrary_Phone" Source="AsyncCtpLibrary_Phone.dll" />
     <AssemblyPart x:Name="GalaSoft.MvvmLight.Extras.WP71" Source="GalaSoft.MvvmLight.Extras.WP71.dll" />
     <AssemblyPart x:Name="GalaSoft.MvvmLight.WP71" Source="GalaSoft.MvvmLight.WP71.dll" />
+    <AssemblyPart x:Name="Microsoft.Expression.Interactions" Source="Microsoft.Expression.Interactions.dll" />
     <AssemblyPart x:Name="Microsoft.Practices.ServiceLocation" Source="Microsoft.Practices.ServiceLocation.dll" />
     <AssemblyPart x:Name="Newtonsoft.Json" Source="Newtonsoft.Json.dll" />
     <AssemblyPart x:Name="System.Windows.Interactivity" Source="System.Windows.Interactivity.dll" />

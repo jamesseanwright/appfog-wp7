@@ -7,16 +7,17 @@ using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Messaging;
+using Microsoft.Phone.Controls;
 
 namespace AppFogWP7.ViewModel
 {
     public class MyAppViewModelBase : ViewModelBase
     {
         private bool _loading;
-
-
         public bool Loading
         {
             get { return _loading; }

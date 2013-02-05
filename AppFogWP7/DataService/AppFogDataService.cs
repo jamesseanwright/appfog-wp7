@@ -19,23 +19,22 @@ namespace AppFogWP7.DataService
     public class AppFogDataService
     {
         
-        public async Task<InfoModel> CallAPI(string token)
+        public async Task<InfoModel> CallAPI(string endpoint)
         {
             IDataService client;
             bool isUnitTest = AppDomain.CurrentDomain.GetAssemblies().Any(a => a.FullName.StartsWith("Microsoft.VisualStudio.QualityTools.UnitTestFramework"));
 
-            if(isUnitTest)
+            if (isUnitTest)
             {
-                client = new TestableWebClient();   
+                client = new TestableWebClient();
             }
             else
             {
                 client = new MyWebClient();
+                client.AuthHeader = (App.Current as App).AuthToken;
             }
 
-            client.AuthHeader = token;
-
-            string data = await client.DownloadStringTaskAsync(new Uri("https://api.appfog.com/info"));
+            string data = await client.DownloadStringTaskAsync(new Uri("https://api.appfog.com/" + endpoint));
 
             InfoModel newModel = new InfoModel();
 

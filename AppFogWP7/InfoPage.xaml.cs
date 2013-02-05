@@ -9,14 +9,16 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using AppFogWP7.ViewModel;
 using Microsoft.Phone.Controls;
+using AppFogWP7.ViewModel;
+using System.Windows.Interactivity;
 
 namespace AppFogWP7
 {
-    public partial class MainPage : BaseApplicationPage
+    public partial class InfoPage : BaseApplicationPage
     {
-        public MainPage()
+        // Constructor
+        public InfoPage()
         {
             InitializeComponent();
         }

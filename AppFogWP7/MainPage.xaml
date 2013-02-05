@@ -1,24 +1,19 @@
-﻿<phone:PhoneApplicationPage 
+﻿<af:BaseApplicationPage
     x:Class="AppFogWP7.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="clr-namespace:AppFogWP7.ViewModel"
-    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:af="clr-namespace:AppFogWP7"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    shell:SystemTray.IsVisible="True">
-    
-    <phone:PhoneApplicationPage.Resources>
-        <vm:BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
-        <vm:BooleanInverter x:Key="booleanInverter" />
-    </phone:PhoneApplicationPage.Resources>
-    
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True"
+    DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
+
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
@@ -29,54 +24,18 @@
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock x:Name="ApplicationTitle" Text="AppFog" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="Home" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="PageTitle" Text="Welcome" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="48" />
-                <RowDefinition Height="72" />
-                <RowDefinition Height="72" />
-                <RowDefinition Height="48" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="AppFog Token" Grid.Row="0" />
-            <TextBox x:Name="TxtAuthToken" Text="04085b0849221b6a616d65732e7772696768744062736b79622e636f6d063a0645466c2b077d2815512219375364d09677701f82765e66e3d728c6b05c6fe8" Grid.Row="1" IsEnabled="{Binding Loading, Converter={StaticResource booleanInverter}}" />
-            <Button x:Name="BtnAuthenticate" Content="Authenticate"  Grid.Row="2" Command="{Binding GetInfoCommand}" CommandParameter="{Binding Text, ElementName=TxtAuthToken}" IsEnabled="{Binding Loading, Converter={StaticResource booleanInverter}}" />
-            <TextBlock x:Name="TbkLoading" Text="Loading..." Visibility="{Binding Loading, Converter={StaticResource booleanToVisibilityConverter}}" Grid.Row="3" />
-            <StackPanel Grid.Row="4" Visibility="{Binding IsInfoModelAvailable, Converter={StaticResource booleanToVisibilityConverter}}">
-                <TextBlock Style="{StaticResource PhoneTextTitle2Style }" Text="Info" />
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Username: " />
-                    <TextBlock Text="{Binding InfoModel.User}" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Plan: " />
-                    <TextBlock Text="{Binding InfoModel.Plan}" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Number of apps: " />
-                    <TextBlock Text="{Binding InfoModel.Apps}" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Memory Usage: " />
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding InfoModel.MemoryUsed}" />
-                        <TextBlock Text="/" />
-                        <TextBlock Text="{Binding InfoModel.TotalMemory}" />
-                        <TextBlock Text="MB" />
-                    </StackPanel>
-                </StackPanel>
-                <StackPanel Margin="0, 10, 0, 3">
-                    <TextBlock Text="Frameworks" Style="{StaticResource PhoneTextTitle3Style}" />
-                    <ListBox ItemsSource="{Binding InfoModel.Frameworks}" />
-                </StackPanel>
-            </StackPanel>
-        </Grid>
+        <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <TextBlock Text="Please enter you AppFog auth token" />
+            <TextBox x:Name="TxtAuthToken" Text="04085b0849221b6a616d65732e7772696768744062736b79622e636f6d063a0645466c2b077d2815512219375364d09677701f82765e66e3d728c6b05c6fe8" />
+            <Button Content="Save" Command="{Binding SaveAuthTokenCommand}" CommandParameter="{Binding Text, ElementName=TxtAuthToken}" />
+            <Line Stroke="White" StrokeThickness="2" />
+            <Button Content="Info" IsEnabled="{Binding IsTokenSaved}" Command="{Binding GoToPageCommand}" CommandParameter="Info" />
+            <Button Content="Apps" IsEnabled="{Binding IsTokenSaved}" Command="{Binding GoToPageCommand}" CommandParameter="Apps"/>
+        </StackPanel>
     </Grid>
  
     <!--Sample code showing usage of ApplicationBar-->
@@ -91,4 +50,4 @@
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>-->
 
-</phone:PhoneApplicationPage>
+</af:BaseApplicationPage>

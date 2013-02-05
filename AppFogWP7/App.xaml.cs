@@ -24,6 +24,11 @@ namespace AppFogWP7
         public PhoneApplicationFrame RootFrame { get; private set; }
 
         /// <summary>
+        ///  The AppFog auth token required for API calls
+        /// </summary>
+        public string AuthToken { get; set; }
+
+        /// <summary>
         /// Constructor for the Application object.
         /// </summary>
         public App()
