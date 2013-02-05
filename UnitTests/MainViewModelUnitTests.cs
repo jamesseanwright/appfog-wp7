@@ -14,6 +14,7 @@ namespace UnitTests
         public void InfoModelIsAvailableWhenPopulated()
         {
             InfoViewModel mainViewModel = new InfoViewModel();
+            mainViewModel.GetInfo();
             Assert.IsTrue(mainViewModel.IsInfoModelAvailable);
         }
     }
