@@ -1,4 +1,8 @@
-﻿using GalaSoft.MvvmLight;
+﻿using System.Collections.ObjectModel;
+using AppFogWP7.DataService;
+using AppFogWP7.Model;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 
 namespace AppFogWP7.ViewModel
 {
@@ -16,26 +20,32 @@ namespace AppFogWP7.ViewModel
     /// </summary>
     public class AppsViewModel : MyAppViewModelBase
     {
-        /// <summary>
-        /// Initializes a new instance of the AppsViewModel class.
-        /// </summary>
-        public AppsViewModel()
+        private ObservableCollection<AppModel> _apps;
+        public ObservableCollection<AppModel> Apps
         {
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real": Connect to service, etc...
-            ////}
+            get { return _apps; }
+            set
+            {
+                _apps = value;
+                RaisePropertyChanged("Apps");
+            }
         }
 
-        ////public override void Cleanup()
-        ////{
-        ////    // Clean own resources if needed
+        public RelayCommand GetAppsCommand { get; set; }
 
-        ////    base.Cleanup();
-        ////}
+        public AppsViewModel()
+        {
+            _apps = new ObservableCollection<AppModel>();
+            GetAppsCommand = new RelayCommand(GetApps);
+        }
+
+        public async void GetApps()
+        {
+            Loading = true;
+            AppFogDataService appFogDataService = new AppFogDataService();
+            Apps = await appFogDataService.GetApps();
+            Loading = false;
+            IsModelAvailable = true;
+        }
     }
 }

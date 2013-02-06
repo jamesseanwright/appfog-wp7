@@ -3,14 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppFogWP7", "AppFogWP7\AppFogWP7.csproj", "{90F7B839-69CB-46CE-82C5-6C64F21B898E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{827FED31-8B96-43A2-A7AF-58535501C1C4}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DE11160F-911C-45F3-B2B0-1B1CA0118A99}"
 	ProjectSection(SolutionItems) = preProject
 		AppFogWP7.vsmdi = AppFogWP7.vsmdi
 		Local.testsettings = Local.testsettings
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{827FED31-8B96-43A2-A7AF-58535501C1C4}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution

@@ -12,7 +12,7 @@ using System.Windows.Shapes;
 
 namespace AppFogWP7.DataService
 {
-    public class MyWebClient : IDataService
+    public class MyWebClient : IWebClient
     {
         private WebClient _client = new WebClient();
         private string _authHeader;

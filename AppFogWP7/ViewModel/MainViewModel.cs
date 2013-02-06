@@ -21,8 +21,8 @@ namespace AppFogWP7.ViewModel
     /// </summary>
     public class MainViewModel : MyAppViewModelBase
     {
-        public RelayCommand<string> SaveAuthTokenCommand { get; private set; }
-        public RelayCommand<string> GoToPageCommand { get; private set; }
+        public RelayCommand<string> SaveAuthTokenCommand { get; set; }
+        public RelayCommand<string> GoToPageCommand { get; set; }
         
         private bool _isTokenSaved;
         public bool IsTokenSaved

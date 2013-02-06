@@ -15,7 +15,7 @@ namespace UnitTests
         {
             InfoViewModel mainViewModel = new InfoViewModel();
             mainViewModel.GetInfo();
-            Assert.IsTrue(mainViewModel.IsInfoModelAvailable);
+            Assert.IsTrue(mainViewModel.IsModelAvailable);
         }
     }
 }

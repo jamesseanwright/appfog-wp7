@@ -27,5 +27,16 @@ namespace AppFogWP7.ViewModel
                 RaisePropertyChanged("Loading");
             }
         }
+
+        private bool _isModelAvailable;
+        public bool IsModelAvailable
+        {
+            set
+            {
+                _isModelAvailable = value;
+                RaisePropertyChanged("IsModelAvailable");
+            }
+            get { return _isModelAvailable; }
+        }
     }
 }

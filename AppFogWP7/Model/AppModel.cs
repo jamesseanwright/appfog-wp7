@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,5 +15,15 @@ namespace AppFogWP7.Model
     public class AppModel
     {
         public string Name { get; set; }
+        public int Instances { get; set; }
+        public string Stack { get; set; }
+        public int Memory { get; set; }
+        public List<string> Uris { get; set; }
+        public DateTime Created { get; set; }
+
+        public AppModel()
+        {
+            Uris = new List<string>();
+        }
     }
 }

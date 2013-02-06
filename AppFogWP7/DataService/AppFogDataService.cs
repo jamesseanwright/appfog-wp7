@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Collections.ObjectModel;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
 using System.Runtime.Serialization;
-using AppFogWP7.DataService.Mock;
+using AppFogWP7.Utils;
 using GalaSoft.MvvmLight;
 using AppFogWP7.Model;
 using System.Net;
@@ -19,22 +20,11 @@ namespace AppFogWP7.DataService
     public class AppFogDataService
     {
         
-        public async Task<InfoModel> CallAPI(string endpoint)
+        public async Task<InfoModel> GetInfo()
         {
-            IDataService client;
-            bool isUnitTest = AppDomain.CurrentDomain.GetAssemblies().Any(a => a.FullName.StartsWith("Microsoft.VisualStudio.QualityTools.UnitTestFramework"));
+            IWebClient client = GetClient();
 
-            if (isUnitTest)
-            {
-                client = new TestableWebClient();
-            }
-            else
-            {
-                client = new MyWebClient();
-                client.AuthHeader = (App.Current as App).AuthToken;
-            }
-
-            string data = await client.DownloadStringTaskAsync(new Uri("https://api.appfog.com/" + endpoint));
+            string data = await client.DownloadStringTaskAsync(new Uri("https://api.appfog.com/info"));
 
             InfoModel newModel = new InfoModel();
 
@@ -52,6 +42,53 @@ namespace AppFogWP7.DataService
             newModel.TotalMemory = (int) infoJson["limits"]["memory"];
 
             return newModel;
+        }
+
+        public async Task<ObservableCollection<AppModel>> GetApps()
+        {
+            ObservableCollection<AppModel> apps = new ObservableCollection<AppModel>();
+            IWebClient client = GetClient();
+            string data = await client.DownloadStringTaskAsync(new Uri("https://api.appfog.com/apps"));
+            JArray appsJson = JArray.Parse(data);
+            AppModel newModel;
+
+            foreach(JToken app in appsJson)
+            {
+                newModel = new AppModel
+                               {
+                                   Name = app["name"].ToString(),
+                                   Instances = (int) app["instances"],
+                                   Stack = app["staging"]["stack"].ToString(),
+                                   Memory = (int) app["resources"]["memory"],
+                                   Created = DateUtils.TimeStampToDateTime((double) app["meta"]["created"])
+                               };
+
+                foreach (JToken uri in app["uris"])
+                {
+                    newModel.Uris.Add(uri.ToString());
+                }
+
+                apps.Add(newModel);
+            }
+
+            return apps;
+        }
+
+        private IWebClient GetClient()
+        {
+            IWebClient client;
+            bool isUnitTest = AppDomain.CurrentDomain.GetAssemblies().Any(a => a.FullName.StartsWith("Microsoft.VisualStudio.QualityTools.UnitTestFramework"));
+
+            if (isUnitTest)
+            {
+                client = new MockWebClient();
+            }
+            else
+            {
+                client = new MyWebClient {AuthHeader = (App.Current as App).AuthToken};
+            }
+
+            return client;
         }
     }
 }

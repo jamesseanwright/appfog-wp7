@@ -6,12 +6,21 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:af="clr-namespace:AppFogWP7"
-    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP71"
+    xmlns:im="clr-namespace:Microsoft.Expression.Interactivity.Media;assembly=Microsoft.Expression.Interactions"
+    xmlns:vm="clr-namespace:AppFogWP7.ViewModel" FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    DataContext="{Binding AppsViewModel, Source={StaticResource Locator}}">
+    
+    <af:BaseApplicationPage.Resources>
+        <vm:BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
+        <vm:BooleanInverter x:Key="booleanInverter" />
+    </af:BaseApplicationPage.Resources>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -22,11 +31,77 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="page name" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="ApplicationTitle" Text="AppFog" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="Apps" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0"></Grid>
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <Grid.Resources>
+                <Storyboard x:Name="transformStoryboard">
+                    <DoubleAnimation Storyboard.TargetName="loadingTransform"
+                                     Storyboard.TargetProperty="Angle"
+                                     From="0" To="360" Duration="0:0:3"
+                                     RepeatBehavior="Forever">
+                        <DoubleAnimation.EasingFunction>
+                            <QuarticEase EasingMode="EaseInOut" />
+                        </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                </Storyboard>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="120" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Loaded">
+                    <cmd:EventToCommand Command="{Binding GetAppsCommand}" />
+                    <im:ControlStoryboardAction Storyboard="{StaticResource transformStoryboard}"
+                                        ControlStoryboardOption="Play" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+
+            <ListBox Grid.Row="0" ItemsSource="{Binding Apps}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name}" Style="{StaticResource PhoneTextTitle2Style}" />
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Instances:" />
+                                <TextBlock Text="{Binding Instances}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Stack:" />
+                                <TextBlock Text="{Binding Stack}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Memory:" />
+                                <TextBlock Text="{Binding Memory}" />
+                                <TextBlock Text="MB" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Created:" />
+                                <TextBlock Text="{Binding Created}" />
+                            </StackPanel>
+                            <TextBlock Text="URIs:" />
+                            <ListBox ItemsSource="{Binding Uris}" />
+                        </StackPanel>  
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <StackPanel Grid.Row="1" Visibility="{Binding Loading, Converter={StaticResource booleanToVisibilityConverter}}">
+                <Image Source="ApplicationIcon.png" Width="62" Height="62">
+                    <Image.RenderTransform>
+                        <RotateTransform x:Name="loadingTransform" Angle="0" CenterX="31" CenterY="31" />
+                    </Image.RenderTransform>
+                </Image>
+                <TextBlock Text="Loading..." TextAlignment="Center" Margin="0, 14, 0, 0" />
+            </StackPanel>
+        </Grid>
     </Grid>
 </af:BaseApplicationPage>

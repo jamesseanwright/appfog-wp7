@@ -66,15 +66,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
 
-            <StackPanel Grid.Row="1" Visibility="{Binding Loading, Converter={StaticResource booleanToVisibilityConverter}}">
-                <Image Source="ApplicationIcon.png" Width="62" Height="62">
-                    <Image.RenderTransform>
-                        <RotateTransform x:Name="loadingTransform" Angle="0" CenterX="31" CenterY="31" />
-                    </Image.RenderTransform>
-                </Image>
-                <TextBlock Text="Loading..." TextAlignment="Center" Margin="0, 14, 0, 0" />
-            </StackPanel>
-            <StackPanel Grid.Row="0" Visibility="{Binding IsInfoModelAvailable, Converter={StaticResource booleanToVisibilityConverter}}">
+            <StackPanel Grid.Row="0" Visibility="{Binding IsModelAvailable, Converter={StaticResource booleanToVisibilityConverter}}">
                 <TextBlock Style="{StaticResource PhoneTextTitle2Style }" Text="Info" />
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Username: " />
@@ -101,6 +93,15 @@
                     <TextBlock Text="Frameworks" Style="{StaticResource PhoneTextTitle3Style}" />
                     <ListBox ItemsSource="{Binding InfoModel.Frameworks}" />
                 </StackPanel>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Visibility="{Binding Loading, Converter={StaticResource booleanToVisibilityConverter}}">
+                <Image Source="ApplicationIcon.png" Width="62" Height="62">
+                    <Image.RenderTransform>
+                        <RotateTransform x:Name="loadingTransform" Angle="0" CenterX="31" CenterY="31" />
+                    </Image.RenderTransform>
+                </Image>
+                <TextBlock Text="Loading..." TextAlignment="Center" Margin="0, 14, 0, 0" />
             </StackPanel>
         </Grid>
     </Grid>

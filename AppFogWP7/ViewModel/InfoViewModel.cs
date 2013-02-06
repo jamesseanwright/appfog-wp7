@@ -48,16 +48,6 @@ namespace AppFogWP7.ViewModel
             }
         }
 
-        public bool IsInfoModelAvailable
-        {
-            set
-            {
-                _isInfoModelAvailable = value;
-                RaisePropertyChanged("IsInfoModelAvailable");
-            }
-            get { return _isInfoModelAvailable; }
-        }
-
         public RelayCommand GetInfoCommand
         {
             get { return _getInfoCommand; }
@@ -70,9 +60,9 @@ namespace AppFogWP7.ViewModel
         {
             Loading = true;
             AppFogDataService appFogDataService = new AppFogDataService();
-            InfoModel = await appFogDataService.CallAPI("info");
+            InfoModel = await appFogDataService.GetInfo();
             Loading = false;
-            IsInfoModelAvailable = true;
+            IsModelAvailable = true;
         }
 
         #endregion
@@ -80,8 +70,7 @@ namespace AppFogWP7.ViewModel
         #region fields
 
         private InfoModel _infoModel;
-        public RelayCommand _getInfoCommand;
-        private bool _isInfoModelAvailable;
+        private RelayCommand _getInfoCommand;
 
         #endregion
     }
