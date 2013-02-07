@@ -80,7 +80,6 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseApplicationPageUnitTests.cs" />
     <Compile Include="ConverterUnitTests.cs" />
     <Compile Include="ModelUnitTests.cs" />
     <Compile Include="UtilsTests.cs" />
@@ -91,7 +90,6 @@
     <Compile Include="ViewModelUnitTests\AppViewModelUnitTests.cs" />
     <Compile Include="ViewModelUnitTests\InfoViewModelUnitTests.cs" />
     <Compile Include="ViewModelUnitTests\MainViewModelUnitTests.cs" />
-    <Compile Include="WebClientUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

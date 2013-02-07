@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AppFogWP7.DataService
 {
-    interface IWebClient
+    public interface IWebClient
     {
         string AuthHeader { get; set; }
         Task<string> DownloadStringTaskAsync(Uri uri);

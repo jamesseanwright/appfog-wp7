@@ -23,7 +23,7 @@ namespace UnitTests.ViewModelUnitTests
         public void AppsModelHasListObject()
         {
             AppsViewModel appsViewModel = new AppsViewModel();
-            Assert.AreEqual(new List<AppModel>(), appsViewModel.Apps);
+            Assert.IsInstanceOfType(appsViewModel.Apps, typeof(List<AppModel>));
         }
     }
 }

@@ -34,6 +34,7 @@ namespace AppFogWP7.ViewModel
         public InfoViewModel()
         {
             _getInfoCommand = new RelayCommand(GetInfo);
+            _infoModel = new InfoModel();
         }
 
         #region properties

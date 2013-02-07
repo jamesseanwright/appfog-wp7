@@ -21,10 +21,9 @@ namespace UnitTests
         [TestMethod]
         public void CreatesViewModelInstances()
         {
-            
-            Assert.AreEqual(new MainViewModel(), _locator.MainViewModel);
-            Assert.AreEqual(new InfoViewModel(), _locator.InfoViewModel);
-            Assert.AreEqual(new AppsViewModel(), _locator.AppsViewModel);
+            Assert.IsInstanceOfType(_locator.InfoViewModel, typeof(InfoViewModel));
+            Assert.IsInstanceOfType(_locator.AppsViewModel, typeof(AppsViewModel));
+            Assert.IsInstanceOfType(_locator.MainViewModel, typeof(MainViewModel));
         }
 
         [TestMethod]
@@ -36,7 +35,7 @@ namespace UnitTests
         [TestMethod]
         public void MainPropertyReturnsCurrentMainViewModel()
         {
-            Assert.AreEqual(new MainViewModel(), _locator.Main);
+            Assert.IsInstanceOfType(_locator.MainViewModel, typeof(MainViewModel));
         }
     }
 }

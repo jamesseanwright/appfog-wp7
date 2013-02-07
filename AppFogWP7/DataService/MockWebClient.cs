@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AppFogWP7.DataService
 {
-    partial class MockWebClient : IWebClient
+    public partial class MockWebClient : IWebClient
     {
         public async Task<string> DownloadStringTaskAsync(Uri uri)
         {

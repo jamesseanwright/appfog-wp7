@@ -1,25 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using System.Windows;
-using System.Runtime.Serialization;
 using AppFogWP7.Utils;
-using GalaSoft.MvvmLight;
 using AppFogWP7.Model;
-using System.Net;
-using GalaSoft.MvvmLight.Command;
 using Newtonsoft.Json.Linq;
 
 namespace AppFogWP7.DataService
 {
     public class AppFogDataService
     {
-        
+        public bool IsUnitTest;
+
+        public AppFogDataService()
+        {
+            IsUnitTest = AppDomain.CurrentDomain.GetAssemblies().Any(a => a.FullName.StartsWith("Microsoft.VisualStudio.QualityTools.UnitTestFramework"));
+        }
+
         public async Task<InfoModel> GetInfo(string token)
         {
             IWebClient client = GetClient(token);
@@ -47,9 +44,13 @@ namespace AppFogWP7.DataService
         public async Task<List<AppModel>> GetApps(string token)
         {
             List<AppModel> apps = new List<AppModel>();
+            
             IWebClient client = GetClient(token);
+            
             string data = await client.DownloadStringTaskAsync(new Uri("https://api.appfog.com/apps"));
+
             JArray appsJson = JArray.Parse(data);
+            
             AppModel newModel;
 
             foreach(JToken app in appsJson)
@@ -74,12 +75,11 @@ namespace AppFogWP7.DataService
             return apps;
         }
 
-        private IWebClient GetClient(string token)
+        public IWebClient GetClient(string token)
         {
             IWebClient client;
-            bool isUnitTest = AppDomain.CurrentDomain.GetAssemblies().Any(a => a.FullName.StartsWith("Microsoft.VisualStudio.QualityTools.UnitTestFramework"));
 
-            if (isUnitTest)
+            if (IsUnitTest)
             {
                 client = new MockWebClient();
             }

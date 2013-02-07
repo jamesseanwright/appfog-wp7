@@ -30,7 +30,7 @@ namespace UnitTests.ViewModelUnitTests
         [TestMethod]
         public void ReturnsNewInfoModel()
         {
-            Assert.AreEqual(new InfoModel(), _infoViewModel.InfoModel);
+            Assert.IsInstanceOfType(_infoViewModel.InfoModel, typeof(InfoModel));
         }
 
         [TestMethod]

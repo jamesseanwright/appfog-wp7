@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,6 +50,15 @@ namespace UnitTests
             Assert.AreEqual(256, appModel.Memory);
             Assert.AreEqual("jamesswright.eu01.aws.af.cm", appModel.Uris.First());
             Assert.AreEqual(DateUtils.TimeStampToDateTime(1359854226.0), appModel.Created);
+        }
+
+        [TestMethod]
+        public void ReturnsWebClientIfUnitTest()
+        {
+            _appFogDataService.IsUnitTest = true;
+
+            IWebClient client = _appFogDataService.GetClient("token");
+            Assert.IsInstanceOfType(client, typeof(MockWebClient));
         }
     }
 }
