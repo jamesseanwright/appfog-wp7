@@ -2,6 +2,7 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Silverlight.Testing;
 using Microsoft.Silverlight.Testing.UnitTesting.Metadata.VisualStudio;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AppFogWP7.DataService;
@@ -25,7 +26,7 @@ namespace UnitTests
         [TestMethod]
         public async void ReceivesCorrectInfoData()
         {
-            InfoModel infoModel = await _appFogDataService.GetInfo();
+            InfoModel infoModel = await _appFogDataService.GetInfo("token");
             
             Assert.AreEqual("test_user", infoModel.User);
             Assert.AreEqual("test_plan", infoModel.Plan);
@@ -37,8 +38,9 @@ namespace UnitTests
 
         [TestMethod]
         public async void ReceivesCorrectAppsData()
-        {
-            var appModels = await _appFogDataService.GetApps();
+        {            
+            var appModels = await _appFogDataService.GetApps("token");
+            
             AppModel appModel = appModels.First();
 
             Assert.AreEqual("test_app", appModel.Name);

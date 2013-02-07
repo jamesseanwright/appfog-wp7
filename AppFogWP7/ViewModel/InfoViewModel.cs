@@ -58,9 +58,8 @@ namespace AppFogWP7.ViewModel
         #region methods
         public async void GetInfo()
         {
-            Loading = true;
             AppFogDataService appFogDataService = new AppFogDataService();
-            InfoModel = await appFogDataService.GetInfo();
+            InfoModel = await appFogDataService.GetInfo(AuthToken);
             Loading = false;
             IsModelAvailable = true;
         }

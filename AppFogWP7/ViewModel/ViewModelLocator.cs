@@ -12,6 +12,7 @@
   See http://www.galasoft.ch/mvvm
 */
 
+using System;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
@@ -27,6 +28,7 @@ namespace AppFogWP7.ViewModel
         public MainViewModel MainViewModel { get; set; }
         public InfoViewModel InfoViewModel { get; set; }
         public AppsViewModel AppsViewModel { get; set; }
+        public bool Registered { get; set; }
 
         public ViewModelLocator()
         {
@@ -35,10 +37,10 @@ namespace AppFogWP7.ViewModel
             AppsViewModel = new AppsViewModel();
 
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-            
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<InfoViewModel>();
             SimpleIoc.Default.Register<AppsViewModel>();
+            Registered = true;
         }
 
         public MainViewModel Main
@@ -47,11 +49,6 @@ namespace AppFogWP7.ViewModel
             {
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
-        }
-        
-        public static void Cleanup()
-        {
-            // TODO Clear the ViewModels
         }
     }
 }

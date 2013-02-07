@@ -17,6 +17,11 @@ namespace AppFogWP7.DataService
         private WebClient _client = new WebClient();
         private string _authHeader;
 
+        public WebClient Client
+        {
+            get { return _client; }
+        }
+
         public string AuthHeader
         {
             get { return _authHeader; }

@@ -20,9 +20,9 @@ namespace AppFogWP7.DataService
     public class AppFogDataService
     {
         
-        public async Task<InfoModel> GetInfo()
+        public async Task<InfoModel> GetInfo(string token)
         {
-            IWebClient client = GetClient();
+            IWebClient client = GetClient(token);
 
             string data = await client.DownloadStringTaskAsync(new Uri("https://api.appfog.com/info"));
 
@@ -44,10 +44,10 @@ namespace AppFogWP7.DataService
             return newModel;
         }
 
-        public async Task<ObservableCollection<AppModel>> GetApps()
+        public async Task<List<AppModel>> GetApps(string token)
         {
-            ObservableCollection<AppModel> apps = new ObservableCollection<AppModel>();
-            IWebClient client = GetClient();
+            List<AppModel> apps = new List<AppModel>();
+            IWebClient client = GetClient(token);
             string data = await client.DownloadStringTaskAsync(new Uri("https://api.appfog.com/apps"));
             JArray appsJson = JArray.Parse(data);
             AppModel newModel;
@@ -74,7 +74,7 @@ namespace AppFogWP7.DataService
             return apps;
         }
 
-        private IWebClient GetClient()
+        private IWebClient GetClient(string token)
         {
             IWebClient client;
             bool isUnitTest = AppDomain.CurrentDomain.GetAssemblies().Any(a => a.FullName.StartsWith("Microsoft.VisualStudio.QualityTools.UnitTestFramework"));
@@ -85,7 +85,7 @@ namespace AppFogWP7.DataService
             }
             else
             {
-                client = new MyWebClient {AuthHeader = (App.Current as App).AuthToken};
+                client = new MyWebClient { AuthHeader = token };
             }
 
             return client;

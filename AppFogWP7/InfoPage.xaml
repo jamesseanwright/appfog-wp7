@@ -10,7 +10,7 @@
     xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP71"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:AppFogWP7.ViewModel" xmlns:System="clr-namespace:System;assembly=System"
-    xmlns:af="clr-namespace:AppFogWP7"
+    xmlns:af="clr-namespace:AppFogWP7" xmlns:conv="clr-namespace:AppFogWP7.Converter"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -19,8 +19,8 @@
     DataContext="{Binding InfoViewModel, Source={StaticResource Locator}}" mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480">
     
     <af:BaseApplicationPage.Resources>
-        <vm:BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
-        <vm:BooleanInverter x:Key="booleanInverter" />
+        <conv:BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
+        <conv:BooleanInverter x:Key="booleanInverter" />
     </af:BaseApplicationPage.Resources>
     
     <!--LayoutRoot is the root grid where all page content is placed-->

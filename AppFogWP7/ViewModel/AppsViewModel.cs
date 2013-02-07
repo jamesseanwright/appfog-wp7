@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using AppFogWP7.DataService;
 using AppFogWP7.Model;
 using GalaSoft.MvvmLight;
@@ -20,8 +21,8 @@ namespace AppFogWP7.ViewModel
     /// </summary>
     public class AppsViewModel : MyAppViewModelBase
     {
-        private ObservableCollection<AppModel> _apps;
-        public ObservableCollection<AppModel> Apps
+        private List<AppModel> _apps;
+        public List<AppModel> Apps
         {
             get { return _apps; }
             set
@@ -35,15 +36,14 @@ namespace AppFogWP7.ViewModel
 
         public AppsViewModel()
         {
-            _apps = new ObservableCollection<AppModel>();
+            _apps = new List<AppModel>();
             GetAppsCommand = new RelayCommand(GetApps);
         }
 
         public async void GetApps()
         {
-            Loading = true;
             AppFogDataService appFogDataService = new AppFogDataService();
-            Apps = await appFogDataService.GetApps();
+            Apps = await appFogDataService.GetApps(AuthToken);
             Loading = false;
             IsModelAvailable = true;
         }

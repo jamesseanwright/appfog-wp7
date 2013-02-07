@@ -3,6 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using AppFogWP7.Converter;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AppFogWP7.ViewModel;
 
@@ -29,6 +30,21 @@ namespace UnitTests
         }
 
         [TestMethod]
+        public void ConvertsInvalidBooleanToTrue()
+        {
+            bool isTrue = (bool)_inverter.Convert("a string", typeof(bool), null, null);
+            Assert.IsTrue(isTrue);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NotImplementedException))]
+        public void BoolConvertBackThrowsNotImplementedException()
+        {
+            bool isTrue = (bool)_inverter.ConvertBack(false, typeof(bool), null, null);
+            Assert.Fail();
+        }
+
+        [TestMethod]
         public void ConvertsFalseToTrue()
         {
             bool isTrue = (bool) _inverter.Convert(false, typeof(bool), null, null);
@@ -47,6 +63,21 @@ namespace UnitTests
         {
             Visibility collapsed = (Visibility)_converter.Convert(false, typeof(Visibility), null, null);
             Assert.AreEqual(Visibility.Collapsed, collapsed);
+        }
+
+        [TestMethod]
+        public void ConvertsInvalidBooleanToVisible()
+        {
+            Visibility collapsed = (Visibility)_converter.Convert("a string", typeof(Visibility), null, null);
+            Assert.AreEqual(Visibility.Visible, collapsed);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NotImplementedException))]
+        public void VisibilityConvertBackThrowsNotImplementedException()
+        {
+            bool isTrue = (bool)_converter.ConvertBack(Visibility.Visible, typeof(bool), null, null);
+            Assert.Fail();
         }
     }
 }

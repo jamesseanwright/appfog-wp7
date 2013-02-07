@@ -9,7 +9,8 @@
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP71"
     xmlns:im="clr-namespace:Microsoft.Expression.Interactivity.Media;assembly=Microsoft.Expression.Interactions"
-    xmlns:vm="clr-namespace:AppFogWP7.ViewModel" FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    xmlns:vm="clr-namespace:AppFogWP7.ViewModel" xmlns:conv="clr-namespace:AppFogWP7.Converter"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
@@ -18,8 +19,8 @@
     DataContext="{Binding AppsViewModel, Source={StaticResource Locator}}">
     
     <af:BaseApplicationPage.Resources>
-        <vm:BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
-        <vm:BooleanInverter x:Key="booleanInverter" />
+        <conv:BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
+        <conv:BooleanInverter x:Key="booleanInverter" />
     </af:BaseApplicationPage.Resources>
 
     <!--LayoutRoot is the root grid where all page content is placed-->

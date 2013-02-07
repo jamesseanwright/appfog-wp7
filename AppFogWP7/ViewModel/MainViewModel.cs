@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using System.Windows.Navigation;
+using AppFogWP7.Messages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -23,6 +24,7 @@ namespace AppFogWP7.ViewModel
     {
         public RelayCommand<string> SaveAuthTokenCommand { get; set; }
         public RelayCommand<string> GoToPageCommand { get; set; }
+        public bool CanNavigate { get; set; }
         
         private bool _isTokenSaved;
         public bool IsTokenSaved
@@ -37,25 +39,28 @@ namespace AppFogWP7.ViewModel
 
         public MainViewModel()
         {
+            CanNavigate = true;
             SaveAuthTokenCommand = new RelayCommand<string>(SaveAuthToken);
             GoToPageCommand = new RelayCommand<string>(GoToPage);
         }
 
         public void SaveAuthToken(string token)
         {
-            (App.Current as App).AuthToken = token;
+            AuthToken = token;
             IsTokenSaved = true;
         }
 
         public void GoToPage(string page)
         {
+            PageNavigatedMessage message = new PageNavigatedMessage(this, null, new Uri("/" + page + "Page.xaml", UriKind.Relative));
+
             try
             {
-                Messenger.Default.Send(new Uri("/" + page + "Page.xaml", UriKind.Relative), "NavigationRequest");
+                Messenger.Default.Send(message);
             }
-            catch (Exception e)
+            catch
             {
-                System.Console.WriteLine(e.Message);
+                CanNavigate = false;
             }
         }
     }

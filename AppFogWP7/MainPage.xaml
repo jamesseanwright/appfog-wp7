@@ -30,7 +30,7 @@
         <!--ContentPanel - place additional content here-->
         <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <TextBlock Text="Please enter you AppFog auth token" />
-            <TextBox x:Name="TxtAuthToken" Text="04085b0849221e6a616d65737365616e77726967687440676d61696c2e636f6d063a0645466c2b077f401a512219b444663471b852cb0697b94349d3d41971bfc497" />
+            <TextBox x:Name="TxtAuthToken" Text="04085b0849221b6a616d65732e7772696768744062736b79622e636f6d063a0645466c2b077d2815512219375364d09677701f82765e66e3d728c6b05c6fe8" />
             <Button Content="Save" Command="{Binding SaveAuthTokenCommand}" CommandParameter="{Binding Text, ElementName=TxtAuthToken}" />
             <Line Stroke="White" StrokeThickness="2" />
             <Button Content="Info" IsEnabled="{Binding IsTokenSaved}" Command="{Binding GoToPageCommand}" CommandParameter="Info" />

@@ -94,6 +94,7 @@
     </Compile>
     <Compile Include="BaseApplicationPage.cs" />
     <Compile Include="DataService\AppFogDataService.cs" />
+    <Compile Include="DataService\DataServiceGlobals.cs" />
     <Compile Include="DataService\IWebClient.cs" />
     <Compile Include="DataService\MockWebClient.cs" />
     <Compile Include="DataService\MyWebClient.cs" />
@@ -103,13 +104,14 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Messages\PageNavigatedMessage.cs" />
     <Compile Include="Model\AppModel.cs" />
     <Compile Include="Model\InfoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\DateUtils.cs" />
     <Compile Include="ViewModel\AppsViewModel.cs" />
-    <Compile Include="ViewModel\BooleanInverter.cs" />
-    <Compile Include="ViewModel\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converter\BooleanInverter.cs" />
+    <Compile Include="Converter\BooleanToVisibilityConverter.cs" />
     <Compile Include="ViewModel\InfoViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MyAppViewModelBase.cs" />

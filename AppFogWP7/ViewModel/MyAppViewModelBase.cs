@@ -17,6 +17,8 @@ namespace AppFogWP7.ViewModel
 {
     public class MyAppViewModelBase : ViewModelBase
     {
+        public static string AuthToken { get; set; }
+
         private bool _loading;
         public bool Loading
         {
@@ -37,6 +39,11 @@ namespace AppFogWP7.ViewModel
                 RaisePropertyChanged("IsModelAvailable");
             }
             get { return _isModelAvailable; }
+        }
+
+        public MyAppViewModelBase()
+        {
+            _loading = true;
         }
     }
 }
