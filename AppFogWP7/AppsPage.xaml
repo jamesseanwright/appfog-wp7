@@ -72,23 +72,23 @@
                         <StackPanel>
                             <TextBlock Text="{Binding Name}" Style="{StaticResource PhoneTextTitle2Style}" />
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Instances:" />
+                                <TextBlock Text="Instances: " />
                                 <TextBlock Text="{Binding Instances}" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Stack:" />
+                                <TextBlock Text="Stack: " />
                                 <TextBlock Text="{Binding Stack}" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Memory:" />
+                                <TextBlock Text="Memory: " />
                                 <TextBlock Text="{Binding Memory}" />
                                 <TextBlock Text="MB" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Created:" />
+                                <TextBlock Text="Created: " />
                                 <TextBlock Text="{Binding Created}" />
                             </StackPanel>
-                            <TextBlock Text="URIs:" />
+                            <TextBlock Text="URIs: " />
                             <ListBox ItemsSource="{Binding Uris}" />
                         </StackPanel>  
                     </DataTemplate>
