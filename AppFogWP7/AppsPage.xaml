@@ -85,7 +85,7 @@
                                 <TextBlock Text="MB" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Created: " />
+                                <TextBlock Text="Requested: " />
                                 <TextBlock Text="{Binding Created}" />
                             </StackPanel>
                             <TextBlock Text="URIs: " />

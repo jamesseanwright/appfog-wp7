@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AppFogWP7.DataService.Factories;
 using AppFogWP7.Utils;
 using AppFogWP7.Model;
 using Newtonsoft.Json.Linq;
@@ -10,13 +11,6 @@ namespace AppFogWP7.DataService
 {
     public class AppFogDataService
     {
-        public bool IsUnitTest;
-
-        public AppFogDataService()
-        {
-            IsUnitTest = AppDomain.CurrentDomain.GetAssemblies().Any(a => a.FullName.StartsWith("Microsoft.VisualStudio.QualityTools.UnitTestFramework"));
-        }
-
         public async Task<InfoModel> GetInfo(string token)
         {
             IWebClient client = GetClient(token);
@@ -44,7 +38,7 @@ namespace AppFogWP7.DataService
         public async Task<List<AppModel>> GetApps(string token)
         {
             List<AppModel> apps = new List<AppModel>();
-            
+
             IWebClient client = GetClient(token);
             
             string data = await client.DownloadStringTaskAsync(new Uri("https://api.appfog.com/apps"));
@@ -77,17 +71,9 @@ namespace AppFogWP7.DataService
 
         public IWebClient GetClient(string token)
         {
-            IWebClient client;
-
-            if (IsUnitTest)
-            {
-                client = new MockWebClient();
-            }
-            else
-            {
-                client = new MyWebClient { AuthHeader = token };
-            }
-
+            IWebClientFactory factory = FactoryLoader.LoadFactory();
+            IWebClient client = factory.CreateClient();
+            client.AuthHeader = token;
             return client;
         }
     }

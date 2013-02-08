@@ -95,6 +95,10 @@
     <Compile Include="BaseApplicationPage.cs" />
     <Compile Include="DataService\AppFogDataService.cs" />
     <Compile Include="DataService\DataServiceGlobals.cs" />
+    <Compile Include="DataService\Factories\FactoryLoader.cs" />
+    <Compile Include="DataService\Factories\IWebClientFactory.cs" />
+    <Compile Include="DataService\Factories\MockWebClientFactory.cs" />
+    <Compile Include="DataService\Factories\MyWebClientFactory.cs" />
     <Compile Include="DataService\IWebClient.cs" />
     <Compile Include="DataService\MockWebClient.cs" />
     <Compile Include="DataService\MyWebClient.cs" />

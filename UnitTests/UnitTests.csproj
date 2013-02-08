@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConverterUnitTests.cs" />
+    <Compile Include="WebClientFactoryUnitTests.cs" />
     <Compile Include="ModelUnitTests.cs" />
     <Compile Include="UtilsTests.cs" />
     <Compile Include="ViewModelUnitTests\ViewModelBaseUnitTests.cs" />

@@ -55,8 +55,6 @@ namespace UnitTests
         [TestMethod]
         public void ReturnsWebClientIfUnitTest()
         {
-            _appFogDataService.IsUnitTest = true;
-
             IWebClient client = _appFogDataService.GetClient("token");
             Assert.IsInstanceOfType(client, typeof(MockWebClient));
         }
