@@ -11,6 +11,10 @@ namespace AppFogWP7.DataService
 {
     public class AppFogDataService
     {
+        private const string Usage = "usage",
+                             Memory = "memory";
+
+
         public async Task<InfoModel> GetInfo(string token)
         {
             IWebClient client = GetClient(token);
@@ -28,9 +32,9 @@ namespace AppFogWP7.DataService
                 newModel.Frameworks.Add(framework.First["name"].ToString());
             }
 
-            newModel.Apps = (int) infoJson["usage"]["apps"];
-            newModel.MemoryUsed = (int) infoJson["usage"]["memory"];
-            newModel.TotalMemory = (int) infoJson["limits"]["memory"];
+            newModel.Apps = (int) infoJson[Usage]["apps"];
+            newModel.MemoryUsed = (int) infoJson[Usage][Memory];
+            newModel.TotalMemory = (int) infoJson["limits"][Memory];
 
             return newModel;
         }
@@ -54,7 +58,7 @@ namespace AppFogWP7.DataService
                                    Name = app["name"].ToString(),
                                    Instances = (int) app["instances"],
                                    Stack = app["staging"]["stack"].ToString(),
-                                   Memory = (int) app["resources"]["memory"],
+                                   Memory = (int) app["resources"][Memory],
                                    Created = DateUtils.TimeStampToDateTime((double) app["meta"]["created"])
                                };
 
